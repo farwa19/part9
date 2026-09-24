@@ -1,9 +1,9 @@
-import express from 'express'
-import type { Request, Response } from 'express'
+import express from 'express';
+import type { Request, Response } from 'express';
 import calculateBmi from './calculateBmi.ts';
-import calculateExercises from './calculateExercises.ts'
+import calculateExercises from './calculateExercises.ts';
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
 
 app.get('/ping', (_req: Request, res: Response) => {
@@ -16,12 +16,12 @@ app.get('/hello', (_req: Request, res: Response) => {
 
 app.post('/exercises', (req: Request, res: Response) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { daily_exercises, target } = req.body
+  const { daily_exercises, target } = req.body;
 
   if (daily_exercises === undefined || target === undefined) {
     return res.status(400).json({
       error: 'parameters missing'
-    })
+    });
   } else if (
     !Array.isArray(daily_exercises) ||
     !daily_exercises.every((value) => typeof value === 'number') ||
@@ -29,13 +29,13 @@ app.post('/exercises', (req: Request, res: Response) => {
   ) {
     return res.status(400).json({
       error: 'malformatted parameters'
-    })
+    });
   }
 
-  const result = calculateExercises(daily_exercises, target)
+  const result = calculateExercises(daily_exercises, target);
 
-  return res.status(200).json(result)
-})
+  return res.status(200).json(result);
+});
 
 app.get('/bmi', (req: Request, res: Response) => {
    const height = Number(req.query.height);
