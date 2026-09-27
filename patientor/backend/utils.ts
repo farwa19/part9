@@ -5,7 +5,7 @@ import {
   gender,
  
   type NewPatient
-} from './types.js'
+} from './types.js';
 
 
 
