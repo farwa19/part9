@@ -1,10 +1,11 @@
 import { z } from 'zod';
 
+
 import {
   gender,
  
   type NewPatient
-} from './types.ts';
+} from './types.js'
 
 
 

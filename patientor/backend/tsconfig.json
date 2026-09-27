@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "noEmit": true,
-    "module": "nodenext",
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./build",
+    "noEmit": false,
     "esModuleInterop": true,
-    "allowImportingTsExtensions": true,
-    "strict" : true,
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
-  }
+  },
+  "include": ["src/**/*", "index.ts", "routes/**/*", "services/**/*", "utils/**/*"]
 }

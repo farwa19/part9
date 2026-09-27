@@ -5,15 +5,17 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "dev": "concurrently \"tsc --watch\" \"node --watch --experimental-strip-types index.ts\"",
-    "start": "tsc && node index.js",
+    "build": "tsc",
+    "start": "tsc && node build/index.js",
+    "dev": "concurrently \"tsc --watch\" \"node --watch build/index.js\"",
     "lint": "eslint ."
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.0.1",
     "uuid": "^14.0.2",
     "zod": "^3.23.8"

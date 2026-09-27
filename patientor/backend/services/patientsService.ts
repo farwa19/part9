@@ -1,43 +1,41 @@
-import patientData from '../data/patient.json' with { type: "json" };
-import type { NonSensitivePatient,Patient,NewPatient } from '../types.ts';
-import { v4 as uuid } from 'uuid';
+import patientsData from '../data/patient.json'with { type: 'json' };
+import { Patient, NonSensitivePatient, NewPatient } from '../types.js';
+import { v1 as uuid } from 'uuid';
 
-// ⇨ 'b18794e8-5d0d-417c-b361-ba38e78411b4'
+const getEntries = (): Patient[] => {
+  return patientsData as Patient[];
+};
+
 const getNonSensitiveEntries = (): NonSensitivePatient[] => {
-  return patientData.map(({ id, name, dateOfBirth, gender, occupation }) => ({
-    id,
-    name,
-    dateOfBirth,
-    gender,
-    occupation
-  }));
-};
-const getEntries = () => {
-  return patientData;
-};
-
-const addPatient = (entry: NewPatient): Patient => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  const id = uuid();
-
-  const newPatientEntry: Patient = {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-    id,
-    ...entry
-  };
-
-  patientData.push(newPatientEntry);
-
-  return newPatientEntry;
+  return (patientsData as Patient[]).map((patient: Patient): NonSensitivePatient => {
+    const { id, name, dateOfBirth, gender, occupation } = patient;
+    return {
+      id,
+      name,
+      dateOfBirth,
+      gender,
+      occupation,
+    };
+  });
 };
 
 const findById = (id: string): Patient | undefined => {
-  return patientData.find((patient) => patient.id === id);
+  return (patientsData as Patient[]).find((p: Patient) => p.id === id);
+};
+
+const addPatient = (entry: NewPatient): Patient => {
+  const newPatient: Patient = {
+    id: uuid(),
+    ...entry,
+  };
+
+  (patientsData as Patient[]).push(newPatient);
+  return newPatient;
 };
 
 export default {
   getEntries,
   getNonSensitiveEntries,
- addPatient,
- findById
+  findById,
+  addPatient,
 };

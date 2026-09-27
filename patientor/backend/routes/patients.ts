@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { z } from 'zod';
-import patientService from '../services/patientsService';
-import parseNewPatientEntry from '../utils';
+import patientService from '../services/patientsService.js';
+import parseNewPatientEntry from '../utils.js';
 
 const router = express.Router();
 
@@ -10,7 +10,8 @@ router.get('/', (_req: Request, res: Response) => {
 });
 
 router.get('/:id', (req: Request, res: Response) => {
-  const patient = patientService.findById(req.params.id);
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+  const patient = patientService.findById(id);
 
   if (patient) {
     res.json(patient);
