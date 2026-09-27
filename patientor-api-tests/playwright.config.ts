@@ -16,9 +16,11 @@ export default defineConfig({
   },
   // Automatically boot the backend before running API tests in CI
   webServer: {
-    command: 'npm start --prefix ../backend',
+    command: 'npm start --prefix ../patientor/backend',
     url: 'http://127.0.0.1:3001/api/ping',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
+    stdout: 'pipe',
+    stderr: 'pipe',
   },
 });
