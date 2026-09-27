@@ -18,11 +18,15 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "typescript": "^5.0.0",
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/express": "^5.0.6",
     "concurrently": "^10.0.5",
     "eslint": "^10.11.0",
     "typescript-eslint": "^8.70.1"
+    
+
+  
   }
 }
