@@ -1,21 +1,24 @@
-import { defineConfig, devices } from '@playwright/test';
+/// 
+import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
   timeout: 30000,
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: 1,
+  workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://127.0.0.1:3001',
     trace: 'on-first-retry',
   },
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-  ],
+  webServer: {
+    command: 'npm start --prefix ../patientor/backend',
+    url: 'http://127.0.0.1:3001/api/ping',
+    reuseExistingServer: true, // ✅ Allows Playwright to attach if server is already running
+    timeout: 120 * 1000,
+    stdout: 'pipe',
+    stderr: 'pipe',
+  },
 });
