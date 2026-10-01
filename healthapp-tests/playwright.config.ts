@@ -10,12 +10,12 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://127.0.0.1:3001',
+    baseURL: 'http://127.0.0.1:3000',
     trace: 'on-first-retry',
   },
   webServer: {
-    command: 'npm start --prefix ../patientor/backend',
-    url: 'http://127.0.0.1:3001/api/ping',
+    command: 'npm start --prefix ../healthapp',
+    url: 'http://127.0.0.1:3000/ping',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
     stdout: 'pipe',

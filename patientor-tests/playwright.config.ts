@@ -23,7 +23,7 @@ export default defineConfig({
       stderr: 'pipe',
     },
     {
-      command: 'npm run dev --prefix ../patientor/frontend -- --host 127.0.0.1',
+      command: 'npm run dev --prefix ../patientor/frontend -- --host 127.0.0.1 --strictPort',
       url: 'http://127.0.0.1:5173',
       reuseExistingServer: true,
       timeout: 120 * 1000,

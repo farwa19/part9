@@ -25,13 +25,6 @@ jobs:
       working-directory: ./healthapp
       run: npm run lint
     
-    - name: Start healthapp server
-      working-directory: ./healthapp
-      run: |
-        npm start &
-        echo $! > server.pid
-        sleep 3
-    
     - name: Install test dependencies
       working-directory: ./healthapp-tests
       run: npm install
@@ -52,10 +45,3 @@ jobs:
         path: healthapp-tests/playwright-report/
         retention-days: 30
     
-    - name: Stop healthapp server
-      if: always()
-      working-directory: ./healthapp
-      run: |
-        if [ -f server.pid ]; then
-          kill $(cat server.pid) || true
-        fi
