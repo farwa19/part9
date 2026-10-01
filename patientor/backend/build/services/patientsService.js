@@ -1,10 +1,11 @@
 import patientsData from '../data/patient.json' with { type: 'json' };
 import { v1 as uuid } from 'uuid';
+const patients = patientsData;
 const getEntries = () => {
-    return patientsData;
+    return patients;
 };
 const getNonSensitiveEntries = () => {
-    return patientsData.map((patient) => {
+    return patients.map((patient) => {
         const { id, name, dateOfBirth, gender, occupation } = patient;
         return {
             id,
@@ -16,17 +17,26 @@ const getNonSensitiveEntries = () => {
     });
 };
 const findById = (id) => {
-    return patientsData.find((p) => p.id === id);
+    return patients.find(patient => patient.id === id);
 };
 const addPatient = (entry) => {
     const newPatient = {
         id: uuid(),
         ...entry,
     };
-    patientsData.push(newPatient);
+    patients.push(newPatient);
     return newPatient;
 };
+const addEntry = (entry, patient) => {
+    const newEntry = {
+        id: uuid(),
+        ...entry,
+    };
+    patient.entries.push(newEntry);
+    return newEntry;
+};
 export default {
+    addEntry,
     getEntries,
     getNonSensitiveEntries,
     findById,

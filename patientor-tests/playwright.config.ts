@@ -10,15 +10,25 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://127.0.0.1:3001',
+    baseURL: 'http://127.0.0.1:5173',
     trace: 'on-first-retry',
   },
-  webServer: {
-    command: 'npm start --prefix ../patientor/backend',
-    url: 'http://127.0.0.1:3001/api/ping',
-    reuseExistingServer: true, // ✅ Allows Playwright to attach if server is already running
-    timeout: 120 * 1000,
-    stdout: 'pipe',
-    stderr: 'pipe',
-  },
+  webServer: [
+    {
+      command: 'npm start --prefix ../patientor/backend',
+      url: 'http://127.0.0.1:3001/api/ping',
+      reuseExistingServer: true,
+      timeout: 120 * 1000,
+      stdout: 'pipe',
+      stderr: 'pipe',
+    },
+    {
+      command: 'npm run dev --prefix ../patientor/frontend -- --host 127.0.0.1',
+      url: 'http://127.0.0.1:5173',
+      reuseExistingServer: true,
+      timeout: 120 * 1000,
+      stdout: 'pipe',
+      stderr: 'pipe',
+    },
+  ],
 });

@@ -1,3 +1,4 @@
+/// 
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
@@ -9,7 +10,15 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://127.0.0.1:3001',
     trace: 'on-first-retry',
+  },
+  webServer: {
+    command: 'npm start --prefix ../patientor/backend',
+    url: 'http://127.0.0.1:3001/api/ping',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
+    stdout: 'pipe',
+    stderr: 'pipe',
   },
 });

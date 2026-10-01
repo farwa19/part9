@@ -59,6 +59,7 @@ test.describe('Showing patient info', () => {
 
 test.describe('Adding an entry to a patient', () => {
   test('should add a HealthCheck entry to John McClane', async ({ page }) => {
+    const description = `Annual checkup, all clear ${Date.now()}`;
     await page.goto('/');
     await page.getByRole('link', { name: 'John McClane' }).click();
     await expect(page).toHaveURL(/\/patients\/.+/);
@@ -66,11 +67,11 @@ test.describe('Adding an entry to a patient', () => {
     await page.getByRole('button', { name: 'Add New Entry' }).click();
 
     await page.getByLabel('Date').fill('2024-03-15');
-    await page.getByLabel('Description').fill('Annual checkup, all clear');
+    await page.getByLabel('Description').fill(description);
     await page.getByLabel('Specialist').fill('Dr. Test Specialist');
 
     await page.getByRole('button', { name: 'Add' }).click();
 
-    await expect(page.getByText('Annual checkup, all clear')).toBeVisible();
+    await expect(page.getByText(description)).toBeVisible();
   });
 });

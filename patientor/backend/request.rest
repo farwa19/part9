@@ -1,0 +1,14 @@
+POST http://localhost:3001/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "date": "2026-10-01",
+  "type": "Hospital",
+  "specialist": "Dr. Smith",
+  "diagnosisCodes": ["S62.5"],
+  "description": "Patient admitted for observation.",
+  "discharge": {
+    "date": "2026-10-01",
+    "criteria": "Patient is stable and ready for discharge."
+  }
+}
